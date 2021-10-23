@@ -26,6 +26,8 @@ class MainWindow(QMainWindow):
         # Box2
         self.Box2 = QHBoxLayout()
         self.c_button = QPushButton("C")
+        self.c_button.setStyleSheet("background-color: red")
+
         self.minus_button = QPushButton("+/-")
         self.divide_button = QPushButton("/")
         self.backspace_button = QPushButton("<--")
