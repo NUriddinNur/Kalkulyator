@@ -1,5 +1,9 @@
+import sys
+
 from PyQt5.QtWidgets import QApplication, QLineEdit, QHBoxLayout, QWidget, QMainWindow, QPushButton, QLabel, QVBoxLayout
 from PyQt5.QtCore import Qt
+
+import os
 
 
 class MainWindow(QMainWindow):
@@ -99,6 +103,17 @@ class MainWindow(QMainWindow):
 
         self.c_button.clicked.connect(self.c_click)
 
+        self.plyus_button.clicked.connect(lambda: self.operation_chosen("+"))
+        self.minus_button.clicked.connect(lambda: self.operation_chosen("-"))
+        self.divide_button.clicked.connect(lambda: self.operation_chosen("/"))
+        self._x_button.clicked.connect(lambda: self.operation_chosen("*"))
+
+        self.backspace_button.clicked.connect(lambda: self.delete())
+
+        self.equal_button.clicked.connect(self.get_result)
+
+        self.exit_button.clicked.connect(sys.exit)
+
 
     def number_clicked(self, num: str) -> None:
         if not self.operation:
@@ -111,6 +126,34 @@ class MainWindow(QMainWindow):
     def c_click(self):
         self.input_values1 = self.input_values2 = self.operation = ""
         self.input.setText(self.input_values1)
+
+    def operation_chosen(self, op):
+        self.operation = op
+        self.input_values2 = ""
+
+    def get_result(self):
+        if self.operation == "+":
+            self.input_values1 = str(float(self.input_values1) + float(self.input_values2))
+        elif self.operation == "/":
+            self.input_values1 = str(float(self.input_values1) / float(self.input_values2))
+        elif self.operation == "-":
+            self.input_values1 = str(float(self.input_values1) - float(self.input_values2))
+        else:
+            self.input_values1 = str(float(self.input_values1) * float(self.input_values2))
+
+        if self.input_values1.split(".")[-1] == "0":
+            self.input_values1 = self.input_values1.split(".")[0]
+        self.input.setText(self.input_values1)
+
+    def delete(self):
+        list1 = []
+        if self.input_values1 == "":
+            pass
+        else:
+            list1.extend(self.input_values1)
+            list1.pop(-1)
+            self.input_values1 = "".join(list1)
+            self.input.setText(self.input_values1)
 
 
 app = QApplication([])
