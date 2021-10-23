@@ -97,14 +97,20 @@ class MainWindow(QMainWindow):
         self._8_button.clicked.connect(lambda: self.number_clicked("8"))
         self._9_button.clicked.connect(lambda: self.number_clicked("9"))
 
+        self.c_button.clicked.connect(self.c_click)
+
 
     def number_clicked(self, num: str) -> None:
         if not self.operation:
-            self.input_values1 = num
+            self.input_values1 += num
             self.input.setText(self.input_values1)
         else:
-            self.input_values2 = num
+            self.input_values2 += num
             self.input.setText(self.input_values2)
+
+    def c_click(self):
+        self.input_values1 = self.input_values2 = self.operation = ""
+        self.input.setText(self.input_values1)
 
 
 app = QApplication([])
