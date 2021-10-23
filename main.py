@@ -49,10 +49,22 @@ class MainWindow(QMainWindow):
         self.Box4.addWidget(self._6_button)
         self.Box4.addWidget(self.minus_button)
 
+        # Box 5
+        self.Box5 = QHBoxLayout()
+        self._1_button = QPushButton("1")
+        self._2_button = QPushButton("2")
+        self._3_button = QPushButton("3")
+        self.plyus_button = QPushButton("+")
+        self.Box5.addWidget(self._1_button)
+        self.Box5.addWidget(self._2_button)
+        self.Box5.addWidget(self._3_button)
+        self.Box5.addWidget(self.plyus_button)
+
         self.mainBox.addLayout(self.Box1)
         self.mainBox.addLayout(self.Box2)
         self.mainBox.addLayout(self.Box3)
         self.mainBox.addLayout(self.Box4)
+        self.mainBox.addLayout(self.Box5)
 
         container = QWidget()
         container.setLayout(self.mainBox)
