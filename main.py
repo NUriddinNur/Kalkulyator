@@ -7,6 +7,9 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Kalkulyator")
+        self.input_values1 = ""
+        self.input_values2 = ""
+        self.operation = ""
 
         self.mainBox = QVBoxLayout()
         self.mainBox.setAlignment(Qt.AlignTop)
@@ -60,16 +63,48 @@ class MainWindow(QMainWindow):
         self.Box5.addWidget(self._3_button)
         self.Box5.addWidget(self.plyus_button)
 
+        #Box 6
+        self.Box6 = QHBoxLayout()
+        self._0_button = QPushButton("0")
+        self.dot_button = QPushButton(".")
+        self.exit_button = QPushButton("exit")
+        self.equal_button = QPushButton("=")
+        self.Box6.addWidget(self._0_button)
+        self.Box6.addWidget(self.dot_button)
+        self.Box6.addWidget(self.exit_button)
+        self.Box6.addWidget(self.equal_button)
+
         self.mainBox.addLayout(self.Box1)
         self.mainBox.addLayout(self.Box2)
         self.mainBox.addLayout(self.Box3)
         self.mainBox.addLayout(self.Box4)
         self.mainBox.addLayout(self.Box5)
+        self.mainBox.addLayout(self.Box6)
 
         container = QWidget()
         container.setLayout(self.mainBox)
 
         self.setCentralWidget(container)
+
+        self._0_button.clicked.connect(lambda: self.number_clicked("0"))
+        self._1_button.clicked.connect(lambda: self.number_clicked("1"))
+        self._2_button.clicked.connect(lambda: self.number_clicked("2"))
+        self._3_button.clicked.connect(lambda: self.number_clicked("3"))
+        self._4_button.clicked.connect(lambda: self.number_clicked("4"))
+        self._5_button.clicked.connect(lambda: self.number_clicked("5"))
+        self._6_button.clicked.connect(lambda: self.number_clicked("6"))
+        self._7_button.clicked.connect(lambda: self.number_clicked("7"))
+        self._8_button.clicked.connect(lambda: self.number_clicked("8"))
+        self._9_button.clicked.connect(lambda: self.number_clicked("9"))
+
+
+    def number_clicked(self, num: str) -> None:
+        if not self.operation:
+            self.input_values1 = num
+            self.input.setText(self.input_values1)
+        else:
+            self.input_values2 = num
+            self.input.setText(self.input_values2)
 
 
 app = QApplication([])
